@@ -67,6 +67,13 @@ public class Course {
     getModuleByTitle(moduleTitle).ifPresent(module -> module.updateLessonStatus(lessonTitle, free));
   }
 
+  void publish() {
+    if (modules.stream().allMatch(module -> module.getLessons().isEmpty()))
+      throw new IllegalStateException("cannot publish empty course");
+
+    published = true;
+  }
+
   private Optional<Module> getModuleByTitle(String moduleTitle) {
     return modules.stream()
                   .filter(module -> module.getTitle().equalsIgnoreCase(moduleTitle))
