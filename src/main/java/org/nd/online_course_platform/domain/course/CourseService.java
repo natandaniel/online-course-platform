@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseService {
@@ -14,8 +15,32 @@ public class CourseService {
     return courseRepository.findAll();
   }
 
+  public Optional<Course> findByTitle(String title) {
+    return courseRepository.findByTitle(title);
+  }
+
+  public List<Course> findByCategory(String category) {
+    return courseRepository.findByCategory(category);
+  }
+
+  public Course save(Course course) {
+    return courseRepository.save(course);
+  }
+
   public Course createCourse(String title, String description, String category) {
     return new Course(title, description, category, false);
+  }
+
+  public void updateCourseTitle(Course course, String newTitle) {
+    course.setTitle(newTitle);
+  }
+
+  public void updateCourseDescription(Course course, String newDescription) {
+    course.setDescription(newDescription);
+  }
+
+  public void updateCourseCategory(Course course, String newCategory) {
+    course.setCategory(newCategory);
   }
 
   public void createCourseModule(Course course, String moduleTitle, String moduleDescription) {

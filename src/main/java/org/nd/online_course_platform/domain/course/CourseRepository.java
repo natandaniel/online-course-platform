@@ -10,6 +10,8 @@ public interface CourseRepository {
 
   List<Course> findAll();
 
+  List<Course> findByCategory(String category);
+
   long count();
 
   void delete(Course course);
