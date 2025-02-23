@@ -12,7 +12,5 @@ public interface CourseRepository {
 
   List<Course> findByCategory(String category);
 
-  long count();
-
   void delete(Course course);
 }

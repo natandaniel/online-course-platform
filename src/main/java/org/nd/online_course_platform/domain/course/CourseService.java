@@ -23,8 +23,12 @@ public class CourseService {
     return courseRepository.findByCategory(category);
   }
 
-  public Course save(Course course) {
+  public Course saveCourse(Course course) {
     return courseRepository.save(course);
+  }
+
+  public void deleteCourse(Course course) {
+    courseRepository.delete(course);
   }
 
   public Course createCourse(String title, String description, String category) {
