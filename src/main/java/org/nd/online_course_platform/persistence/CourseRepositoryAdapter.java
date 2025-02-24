@@ -20,6 +20,11 @@ public class CourseRepositoryAdapter implements CourseRepository {
   }
 
   @Override
+  public Optional<Course> findById(Integer id) {
+    return springDataCourseRepository.findById(id).map(CourseEntityMapper::toDomain);
+  }
+
+  @Override
   public Optional<Course> findByTitle(String title) {
     return springDataCourseRepository.findByTitle(title).map(CourseEntityMapper::toDomain);
   }
