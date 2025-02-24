@@ -9,13 +9,14 @@ import java.util.Optional;
 
 @Data
 @AllArgsConstructor
-public class Module {
+public class CourseModule {
   private final List<Lesson> lessons = new ArrayList<>();
+  private Integer id;
   private String title;
   private String description;
 
   void addLesson(String title, String content, boolean free) {
-    if (getLessonByTitle(title).isEmpty()) lessons.add(new Lesson(title, content, free));
+    if (getLessonByTitle(title).isEmpty()) lessons.add(new Lesson(null, title, content, free));
   }
 
   void removeLesson(String title) {
@@ -43,7 +44,7 @@ public class Module {
   }
 
   void updateLessonContent(String lessonTitle, String newContent) {
-    getLessonByTitle(lessonTitle).ifPresent(lesson -> lesson.setContent(newContent));
+    getLessonByTitle(lessonTitle).ifPresent(lesson -> lesson.setContentUrl(newContent));
   }
 
   void updateLessonStatus(String lessonTitle, boolean free) {

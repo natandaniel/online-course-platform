@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Lesson {
+  private Integer id;
   private String title;
-  private String content;
+  private String contentUrl;
   private boolean free;
 }
