@@ -1,4 +1,4 @@
-# 📚 Online Learning Platform
+# 📚 Online Course Platform
 
 **A scalable Java-based learning platform to deliver high-quality Java programming courses with seamless course enrollment, progress tracking, and payment integration.**
 
