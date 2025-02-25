@@ -1,8 +1,7 @@
-package org.nd.online_course_platform.persistence;
+package org.nd.online_course_platform.persistence.course;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.nd.online_course_platform.domain.course.Course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,5 +18,5 @@ class CourseModuleEntity {
   private String title;
   private String description;
   @ManyToOne
-  private Course course;
+  private CourseEntity course;
 }

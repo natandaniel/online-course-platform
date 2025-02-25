@@ -1,4 +1,4 @@
-package org.nd.online_course_platform.persistence;
+package org.nd.online_course_platform.persistence.course;
 
 import org.nd.online_course_platform.domain.course.Lesson;
 
@@ -17,7 +17,7 @@ class LessonEntityMapper {
 
   static Lesson toDomain(LessonEntity entity) {
     if (entity == null) throw new IllegalArgumentException("lesson entity cannot be null");
-    
+
     return new Lesson(entity.getId(), entity.getTitle(), entity.getContent(), entity.isFree());
   }
 }

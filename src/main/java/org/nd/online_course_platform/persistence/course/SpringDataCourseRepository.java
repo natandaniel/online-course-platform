@@ -1,4 +1,4 @@
-package org.nd.online_course_platform.persistence;
+package org.nd.online_course_platform.persistence.course;
 
 import org.springframework.data.repository.ListCrudRepository;
 
