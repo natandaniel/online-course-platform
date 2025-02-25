@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CourseCreationServiceImpl implements CourseCreationService {
+public class CourseManagementServiceImpl implements CourseManagementService {
   @Autowired
   private CourseRepository courseRepository;
 
@@ -13,6 +13,11 @@ public class CourseCreationServiceImpl implements CourseCreationService {
     Course newCourse = createEmptyCourse(courseDTO);
     courseDTO.modules().forEach(input -> createCourseModule(input, newCourse));
     return CourseDTO.toDTO(courseRepository.save(newCourse));
+  }
+
+  @Override
+  public void deleteCourse(int courseId) {
+    courseRepository.deleteById(courseId);
   }
 
   private static void createCourseModule(CourseModuleDTO input, Course newCourse) {
