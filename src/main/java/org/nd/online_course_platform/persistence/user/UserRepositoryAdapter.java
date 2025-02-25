@@ -20,6 +20,11 @@ public class UserRepositoryAdapter implements UserRepository {
   }
 
   @Override
+  public Optional<User> findById(int id) {
+    return springDataUserRepository.findById(id).map(UserEntityMapper::toDomain);
+  }
+
+  @Override
   public Optional<User> findByUsername(String username) {
     return springDataUserRepository.findByUsername(username).map(UserEntityMapper::toDomain);
   }
