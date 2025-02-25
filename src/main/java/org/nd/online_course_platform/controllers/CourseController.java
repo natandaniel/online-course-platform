@@ -1,8 +1,8 @@
 package org.nd.online_course_platform.controllers;
 
 import org.nd.online_course_platform.domain.course.CourseBrowsingService;
-import org.nd.online_course_platform.domain.course.CourseCreationService;
 import org.nd.online_course_platform.domain.course.CourseDTO;
+import org.nd.online_course_platform.domain.course.CourseManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -18,7 +18,7 @@ public class CourseController {
   @Autowired
   private CourseBrowsingService courseBrowsingService;
   @Autowired
-  private CourseCreationService courseCreationService;
+  private CourseManagementService courseManagementService;
 
   @GetMapping
   public ResponseEntity<List<EntityModel<CourseDTO>>> getAllCourses() {
@@ -55,9 +55,29 @@ public class CourseController {
     return ResponseEntity.ok(model);
   }
 
+  @GetMapping("/{category}")
+  public ResponseEntity<List<EntityModel<CourseDTO>>> getCoursesByCategory(
+      @PathVariable String category) {
+    List<EntityModel<CourseDTO>> response =
+        courseBrowsingService.findByCategory(category)
+                             .stream()
+                             .map(courseDTO -> {
+                               EntityModel<CourseDTO> model = EntityModel.of(courseDTO);
+                               model.add(
+                                   WebMvcLinkBuilder.linkTo(
+                                                        WebMvcLinkBuilder.methodOn(CourseController.class)
+                                                                         .getCourseById(courseDTO.id()))
+                                                    .withSelfRel());
+                               return model;
+                             })
+                             .toList();
+
+    return ResponseEntity.ok(response);
+  }
+
   @PostMapping
   public ResponseEntity<EntityModel<CourseDTO>> createCourse(@RequestBody CourseDTO courseDTO) {
-    CourseDTO createdCourseDTO = courseCreationService.createCourse(courseDTO);
+    CourseDTO createdCourseDTO = courseManagementService.createCourse(courseDTO);
 
     EntityModel<CourseDTO> model = EntityModel.of(createdCourseDTO);
     model.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(CourseController.class)
@@ -74,6 +94,13 @@ public class CourseController {
                                                                    .getCourseById(createdCourseDTO.id()))
                                               .toUri())
                          .body(model);
+  }
+
+  @DeleteMapping("/{courseId}")
+  public ResponseEntity<Void> deleteCourseById(@PathVariable int courseId) {
+    courseManagementService.deleteCourse(courseId);
+
+    return ResponseEntity.noContent().build();
   }
 
 }
