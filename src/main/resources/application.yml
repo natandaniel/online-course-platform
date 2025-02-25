@@ -1,7 +1,4 @@
 spring:
-  application:
-    name:online-course-platform
-
   security:
     oauth2:
       client:
@@ -9,3 +6,16 @@ spring:
           github:
             clientId: Ov23licRVNuCy2WdPRAT
             clientSecret: a2f93ef55451fb922d3f17ae8086e35cc991083c
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: yourpassword
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
