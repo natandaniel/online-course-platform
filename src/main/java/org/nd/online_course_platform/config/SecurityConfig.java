@@ -1,4 +1,4 @@
-package org.nd.online_course_platform.controllers;
+package org.nd.online_course_platform.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,17 +10,15 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableMethodSecurity  // Enables method-level security annotations like @PreAuthorize
+@EnableMethodSecurity
 public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(
-            AbstractHttpConfigurer::disable) // Disable CSRF for simplicity; configure it
-        // properly for production
+    http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authz ->
             authz.requestMatchers("/api/v1/auth/**")
-                 .permitAll()// Public endpoints (like auth endpoints)
+                 .permitAll()
                  .requestMatchers(HttpMethod.GET, "/api/v1/courses/**")
                  .hasAnyRole("STUDENT", "ADMIN")
                  .requestMatchers(HttpMethod.POST, "/api/v1/courses/**")
@@ -29,11 +27,9 @@ public class SecurityConfig {
                  .hasRole("ADMIN")
                  .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/**")
                  .hasRole("ADMIN")
-                 // Other endpoints require authentication
                  .anyRequest()
-                 .authenticated()
-        )
-        .httpBasic(Customizer.withDefaults());
+                 .authenticated())
+        .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
     return http.build();
   }
 }

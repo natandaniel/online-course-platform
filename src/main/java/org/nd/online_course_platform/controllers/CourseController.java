@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,6 +76,7 @@ public class CourseController {
     return ResponseEntity.ok(response);
   }
 
+  @PreAuthorize("hasRole('ADMIN')")
   @PostMapping
   public ResponseEntity<EntityModel<CourseDTO>> createCourse(@RequestBody CourseDTO courseDTO) {
     CourseDTO createdCourseDTO = courseManagementService.createCourse(courseDTO);
@@ -96,6 +98,7 @@ public class CourseController {
                          .body(model);
   }
 
+  @PreAuthorize("hasRole('ADMIN')")
   @DeleteMapping("/{courseId}")
   public ResponseEntity<Void> deleteCourseById(@PathVariable int courseId) {
     courseManagementService.deleteCourse(courseId);
