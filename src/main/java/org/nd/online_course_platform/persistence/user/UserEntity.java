@@ -14,8 +14,11 @@ abstract class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
+  @Column(unique = true, nullable = false)
   private String username;
+  @Column(unique = true, nullable = false)
   private String email;
+  @Column(nullable = false)
   private String passwordHash;
   private String role;
 
