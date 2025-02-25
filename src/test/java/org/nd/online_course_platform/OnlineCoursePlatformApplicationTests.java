@@ -1,4 +1,4 @@
-package org.nd.online_learning_platform;
+package org.nd.online_course_platform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
