@@ -14,5 +14,5 @@ public interface CourseRepository {
 
   List<Course> findByCategory(String category);
 
-  void delete(Course course);
+  void deleteById(int id);
 }

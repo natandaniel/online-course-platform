@@ -43,7 +43,7 @@ public class CourseRepositoryAdapter implements CourseRepository {
   }
 
   @Override
-  public void delete(Course course) {
-    springDataCourseRepository.delete(CourseEntityMapper.toEntity(course));
+  public void deleteById(int courseId) {
+    springDataCourseRepository.deleteById(courseId);
   }
 }
