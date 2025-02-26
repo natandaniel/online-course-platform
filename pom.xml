@@ -21,7 +21,7 @@
 
 	<modules>
 		<module>rest-api</module>
-		<module>authorization-server</module>
+		<module>auth-server</module>
 	</modules>
 
 	<dependencies>
