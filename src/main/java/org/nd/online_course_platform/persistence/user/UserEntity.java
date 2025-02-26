@@ -14,12 +14,12 @@ abstract class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
-  @Column(unique = true, nullable = false)
+  @Column(unique = true)
   private String username;
-  @Column(unique = true, nullable = false)
+  @Column(unique = true)
   private String email;
-  @Column(nullable = false)
   private String passwordHash;
+  private String provider;
   private String role;
 
   protected UserEntity() {}

@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Student extends User {
 
-  public Student(Integer id, String username, String email, String passwordHash) {
-    super(id, username, email, passwordHash, "student");
+  public Student(Integer id, String username, String email, String passwordHash, String provider) {
+    super(id, username, email, passwordHash, "student", provider);
   }
 }

@@ -39,8 +39,7 @@ public class UserController {
 
     return ResponseEntity.ok(model);
   }
-
-  @PreAuthorize("hasRole('STUDENT')")
+  
   @PostMapping("/register")
   public ResponseEntity<String> registerStudent(
       @Valid @RequestBody UserInputDTO userInputDTO) {
@@ -53,7 +52,7 @@ public class UserController {
 
     UserOutputDTO createdUserDTO = userRegistrationService.registerUser(
         new UserInputDTO(null, userInputDTO.username(), userInputDTO.email(),
-            passwordEncoder.encode(userInputDTO.password()), "student"));
+            passwordEncoder.encode(userInputDTO.password()), "local", "student"));
 
     EntityModel<UserOutputDTO> model = EntityModel.of(createdUserDTO);
     model.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UserController.class)

@@ -11,10 +11,10 @@ class UserEntityMapper {
 
     if ("student".equals(user.getRole()))
       return new StudentEntity(user.getId(), user.getUsername(), user.getEmail(),
-          user.getPasswordHash());
+          user.getPasswordHash(), user.getProvider());
 
     return new AdminEntity(user.getId(), user.getUsername(), user.getEmail(),
-        user.getPasswordHash());
+        user.getPasswordHash(), user.getProvider());
   }
 
   static User toDomain(UserEntity userEntity) {
@@ -22,7 +22,7 @@ class UserEntityMapper {
 
     if ("student".equals(userEntity.getRole()))
       return new Student(userEntity.getId(), userEntity.getUsername(), userEntity.getEmail(),
-          userEntity.getPasswordHash());
+          userEntity.getPasswordHash(), userEntity.getProvider());
 
     return new Admin(userEntity.getId(), userEntity.getUsername(), userEntity.getEmail(),
         userEntity.getPasswordHash());

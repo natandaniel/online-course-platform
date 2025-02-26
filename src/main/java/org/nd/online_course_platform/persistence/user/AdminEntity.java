@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 class AdminEntity extends UserEntity {
 
-  AdminEntity(Integer id, String username, String email, String passwordHash) {
-    super(id, username, email, passwordHash, "admin");
+  AdminEntity(Integer id, String username, String email, String passwordHash, String provider) {
+    super(id, username, email, passwordHash, provider, "admin");
   }
 }

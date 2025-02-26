@@ -8,6 +8,6 @@ import lombok.EqualsAndHashCode;
 public class Admin extends User {
 
   public Admin(Integer id, String username, String email, String passwordHash) {
-    super(id, username, email, passwordHash, "admin");
+    super(id, username, email, passwordHash, "admin", "local");
   }
 }

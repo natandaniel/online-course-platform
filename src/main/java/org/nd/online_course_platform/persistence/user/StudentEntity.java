@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 class StudentEntity extends UserEntity {
 
-  StudentEntity(Integer id, String username, String email, String passwordHash) {
-    super(id, username, email, passwordHash, "student");
+  StudentEntity(Integer id, String username, String email, String passwordHash, String provider) {
+    super(id, username, email, passwordHash, provider, "student");
   }
 }

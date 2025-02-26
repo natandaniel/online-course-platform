@@ -10,6 +10,7 @@ public abstract class User {
   private String username;
   private String email;
   private String passwordHash;
+  private String provider;
   private String role;
 
   protected User() {}
