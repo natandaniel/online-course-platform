@@ -23,7 +23,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     if ("student".equals(userInputDTO.role())) {
       User student =
           userRepository.save(new Student(null, userInputDTO.username(), userInputDTO.email(),
-              userInputDTO.password()));
+              userInputDTO.password(), userInputDTO.provider()));
 
       return new UserOutputDTO(student.getId(), student.getUsername(), student.getEmail());
     }
