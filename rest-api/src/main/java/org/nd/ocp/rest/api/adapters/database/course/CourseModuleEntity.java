@@ -11,8 +11,7 @@ import java.util.List;
 @Data
 class CourseModuleEntity {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "module")
-  private final List<LessonEntity> lessons =
-      new ArrayList<>();
+  private final List<LessonEntity> lessons = new ArrayList<>();
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;

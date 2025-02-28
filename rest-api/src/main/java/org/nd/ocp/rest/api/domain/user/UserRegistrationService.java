@@ -1,11 +1,28 @@
 package org.nd.ocp.rest.api.domain.user;
 
-public interface UserRegistrationService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-  boolean existsByUsername(String username);
+import java.util.Optional;
 
-  boolean existsByEmail(String email);
+@Service
+public class UserRegistrationService {
+  @Autowired
+  private UserRepository userRepository;
 
-  UserOutputDTO registerUser(
-      UserInputDTO userInputDTO);
+  public UserOutputDTO registerUser(UserInputDTO userInputDTO) {
+    if (findByUsernameOrEmail(userInputDTO.username()).isPresent())
+      throw new IllegalArgumentException("Username already taken.");
+
+    if (findByUsernameOrEmail(userInputDTO.email()).isPresent())
+      throw new IllegalArgumentException("Email already in use.");
+
+    return userRepository.save(User.fromInputDTO(userInputDTO)).toOutputDTO();
+  }
+
+  public Optional<UserOutputDTO> findByUsernameOrEmail(String usernameOrEmail) {
+    return userRepository.findByUsernameOrEmail(usernameOrEmail)
+                         .map(User::toOutputDTO);
+  }
+
 }

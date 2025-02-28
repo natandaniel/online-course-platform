@@ -1,9 +1,10 @@
 package org.nd.ocp.rest.api.domain.user;
 
+import java.util.List;
+
 public record UserInputDTO(
-    Integer id,
     String username,
     String email,
     String password,
     String provider,
-    String role) {}
+    List<String> roles) {}

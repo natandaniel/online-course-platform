@@ -1,11 +1,20 @@
 package org.nd.ocp.rest.api.domain.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
-public interface UserManagementService {
+@Service
+public class UserManagementService {
+  @Autowired
+  UserRepository userRepository;
 
-  Optional<UserOutputDTO> findById(int userId);
+  public Optional<UserOutputDTO> findById(int userId) {
+    return userRepository.findById(userId).map(User::toOutputDTO);
+  }
 
-  void deleteUser(int userId);
-
+  public void deleteUser(int userId) {
+    userRepository.deleteById(userId);
+  }
 }
