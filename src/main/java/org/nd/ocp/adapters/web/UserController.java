@@ -11,6 +11,7 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,28 +55,6 @@ public class UserController {
     UserOutputDTO createdUserDTO = userRegistrationService.registerUser(
         new UserInputDTO(username, email, passwordEncoder.encode(password),
             "local", List.of("student")));
-
-    WebUserOutputDTO webUserOutputDTO = new WebUserOutputDTO(createdUserDTO.id(),
-        createdUserDTO.username(), createdUserDTO.email(), createdUserDTO.createdAt(),
-        createdUserDTO.updatedAt());
-
-    EntityModel<WebUserOutputDTO> model = EntityModel.of(webUserOutputDTO);
-    model.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UserController.class)
-                                                        .getUserById(createdUserDTO.id()))
-                               .withSelfRel());
-
-    return ResponseEntity.created(WebMvcLinkBuilder.linkTo(
-                             WebMvcLinkBuilder.methodOn(UserController.class).getUserById(createdUserDTO.id())).toUri())
-                         .body(model);
-  }
-
-  @PostMapping("/login")
-  public ResponseEntity<EntityModel<WebUserOutputDTO>> login(
-      @RequestBody UserInputDTO userInputDTO) {
-    UserOutputDTO createdUserDTO = userRegistrationService.registerUser(
-        new UserInputDTO(userInputDTO.username(), userInputDTO.email(),
-            passwordEncoder.encode(userInputDTO.password()),
-            userInputDTO.provider(), userInputDTO.roles()));
 
     WebUserOutputDTO webUserOutputDTO = new WebUserOutputDTO(createdUserDTO.id(),
         createdUserDTO.username(), createdUserDTO.email(), createdUserDTO.createdAt(),

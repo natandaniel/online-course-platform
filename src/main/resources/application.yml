@@ -9,9 +9,6 @@ spring:
             scope: user:email
             redirect-uri: "http://localhost:8080/login/oauth2/code/github"
             client-name: GitHub
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:9000
 
   jpa:
     hibernate:
@@ -25,3 +22,7 @@ spring:
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
