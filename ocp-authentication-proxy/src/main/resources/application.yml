@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.security: trace
+
+spring:
+  thymeleaf:
+    cache: false  # Disable caching for development
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+  security:
+    oauth2:
+      client:
+        registration:
+          ocp-auth-proxy:
+            provider: spring
+            client-id: ocp-auth-proxy
+            client-secret: secret
+            client-authentication-method: client_secret_basic
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8080/login/oauth2/code/ocp-auth-proxy
+            scope: openid,profile,email
+        provider:
+          spring:
+            authorization-uri: http://localhost:9000/oauth2/authorize
+            token-uri: http://localhost:9000/oauth2/token
+            jwk-set-uri: http://localhost:9000/oauth2/jwks
