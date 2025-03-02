@@ -23,6 +23,13 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: http://127.0.0.1:8080/login/oauth2/code/ocp-auth-proxy
             scope: openid,profile,email
+            client-name: OnlineCoursePlatformAuthProxy
+          github:
+            clientId: Ov23licRVNuCy2WdPRAT
+            clientSecret: a2f93ef55451fb922d3f17ae8086e35cc991083c
+            scope: user:email
+            redirect-uri: http://localhost:8080/login/oauth2/code/github
+            client-name: GitHub
         provider:
           spring:
             authorization-uri: http://localhost:9000/oauth2/authorize
