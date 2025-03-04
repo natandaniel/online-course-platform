@@ -18,9 +18,9 @@
 	<modules>
 		<module>ocp-domain</module>
 		<module>ocp-database</module>
-		<module>ocp-authentication-proxy</module>
+		<module>ocp-rest-api-proxy</module>
 		<module>ocp-authorization-server</module>
-		<module>ocp-resource-server</module>
+		<module>ocp-rest-api</module>
 	</modules>
 
 	<properties>

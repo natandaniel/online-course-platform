@@ -30,7 +30,7 @@ public class SecurityConfig {
   @Bean
   public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder) {
     RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                                                        .clientId("ocp-auth-proxy")
+                                                        .clientId("online-course-platform")
                                                         .clientSecret(
                                                             passwordEncoder.encode("secret"))
                                                         .clientAuthenticationMethod(
@@ -40,8 +40,8 @@ public class SecurityConfig {
                                                         .authorizationGrantType(
                                                             AuthorizationGrantType.REFRESH_TOKEN)
                                                         .redirectUri("http://127.0.0" +
-                                                            ".1:8080/login/oauth2/code/ocp" +
-                                                            "-auth-proxy")
+                                                            ".1:8080/login/oauth2/code/online" +
+                                                            "-course-platform")
                                                         .redirectUri(
                                                             "http://127.0.0.1:8080/authorized")
                                                         .scope("openid")
@@ -54,9 +54,7 @@ public class SecurityConfig {
 
   @Bean
   public AuthorizationServerSettings authorizationServerSettings() {
-    return AuthorizationServerSettings.builder()
-                                      .issuer("http://localhost:9000")
-                                      .build();
+    return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
   }
 
 }
